@@ -21,16 +21,16 @@ class App extends Component {
           {/* <div className="wrapper"> */}
             <Sidenav/>
             <div className= "main-panel">
-            <TopNav/>
-            <Switch>
-              <Route exact path= '/' component = {Featured}/>
-              <Route exact path = '/profile' component = {UserProfile}/>
-              <Route exact path = '/typography' component = {Typography}/>
-              <Route exact path = '/notification' component = {Notification}/>
-              <Route exact path = '/table' component = {Tables}/>
-              <Route exact path = '*' component = {NotFound}/>
-            </Switch>
-            <Footer/>
+              <TopNav/>
+              <Switch>
+                <Route exact path= '/' component = {Featured}/>
+                <Route exact path = '/profile' component = {UserProfile}/>
+                <Route exact path = '/typography' component = {Typography}/>
+                <Route exact path = '/notification' component = {Notification}/>
+                <Route exact path = '/table' component = {Tables}/>
+                <Route exact path = '*' component = {NotFound}/>
+              </Switch>
+              <Footer/>
           {/* </div> */}
           </div>
         </div>

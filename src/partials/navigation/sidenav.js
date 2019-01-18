@@ -1,8 +1,31 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {changeActive} from '../../actions/dashboardActions'
+
 
 class Sidenav extends Component{
+  
+  handleonClick = (id) =>{
+    this.props.changeActive(id)
+  }
+
     render() {
+      const {navList}= this.props
+      const {active} = this.props
+      const {id} = this.props
+      const NavLinks = (navList.map(list =>{
+        return(
+            <li onClick = {() => this.handleonClick(list.id)} 
+            className= {active === true & id === list.id ? "active nav-item":""}
+            key = {list.id}
+          >
+            <Link to = {`/${list.link}`}className="nav-link">
+              <p>{list.navLink}</p>
+            </Link>
+          </li>
+        )
+      }))
       return (
           <div className="sidebar" data-color="azure" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
             {/*
@@ -17,46 +40,27 @@ class Sidenav extends Component{
             </div>
             <div className="sidebar-wrapper">
               <ul className="nav">
-                <li className="nav-item active  ">
-                  <Link to ='/' className="nav-link" href="./dashboard.html">
-                    <i className="material-icons">dashboard</i>
-                    <p>Dashboard</p>
-                  </Link>
-                </li>
-                <li className="nav-item ">
-                  <Link to ='/profile' className="nav-link">
-                    <i className="material-icons">person</i>
-                    <p>User Profile</p>
-                  </Link>
-                </li>
-                <li className="nav-item ">
-                  <Link to = '/table' className="nav-link">
-                    <i className="material-icons">content_paste</i>
-                    <p>Table List</p>
-                  </Link>
-                </li>
-                <li className="nav-item ">
-                  <Link to = '/typography' className="nav-link">
-                    <i className="material-icons">library_books</i>
-                    <p>Typography</p>
-                  </Link>
-                </li>
-                <li className="nav-item ">
-                  <Link to = '/notification' className="nav-link">
-                    <i className="material-icons">notifications</i>
-                    <p>Notifications</p>
-                  </Link>
-                </li>
-                {/* <li class="nav-item active-pro ">
-                  <a class="nav-link" href="./upgrade.html">
-                      <i class="material-icons">unarchive</i>
-                      <p>Upgrade to PRO</p>
-                  </a>
-              </li> */}
+                {NavLinks}
               </ul>
             </div>
           </div>
       );
     }
   };
-  export default Sidenav
+  const MapStateToProps = (state) =>{
+    return{
+      navList: state.navList,
+      active: state.active,
+      id: state.id
+    }
+  }
+
+  const MapDispatchToProps = (dispatch) =>{
+    return{
+        changeActive: (id) =>{
+          dispatch(changeActive(id))
+        }
+    }
+}
+
+export default connect (MapStateToProps, MapDispatchToProps)(Sidenav)
