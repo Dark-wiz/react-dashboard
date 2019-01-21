@@ -1,3 +1,7 @@
+import {
+    CHANGE_COLOR
+} from '../actions/Types';
+
 const initialState = {
     active: false,
     id: '1',
@@ -32,18 +36,18 @@ const initialState = {
     ]
 }
 
-const rootreducer = (state = initialState, action) =>{
-    if (action.type === 'CHANGE_COLOR'){
+const DashboardReducer = (state = initialState, action) =>{
+    if (action.type === CHANGE_COLOR){
        let active = true
        let id = action.id
        return{
         ...state,
-        active: active,
-        id: id
+        active,
+        id
        }
     }
 
     return state
 }
 
-export default rootreducer
+export default DashboardReducer

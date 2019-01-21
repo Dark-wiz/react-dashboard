@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {changeActive} from '../../actions/dashboardActions'
+import {changeActive} from '../../store/actions/DashboardActions'
 
 
 class Sidenav extends Component{
